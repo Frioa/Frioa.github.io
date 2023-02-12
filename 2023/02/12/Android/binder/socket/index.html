@@ -6,26 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://frioa.github.io">
-  <title>IDEA 插件 Hello World | YueQ Blog</title>
+  <title>Linux Socket | YueQ Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面 MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。 MySearchableConfigurable，可以用于 Settings 中配置窗体。 TestUI 是基于 Swin">
+  <meta name="description" content="理解 Socket 大致如何工作即可：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDEA 插件 Hello World">
-<meta property="og:url" content="https://frioa.github.io/2023/02/12/IDEA_plugin_hello_world/index.html">
+<meta property="og:title" content="Linux Socket">
+<meta property="og:url" content="https://frioa.github.io/2023/02/12/Android/binder/socket/index.html">
 <meta property="og:site_name" content="YueQ Blog">
-<meta property="og:description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面 MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。 MySearchableConfigurable，可以用于 Settings 中配置窗体。 TestUI 是基于 Swin">
+<meta property="og:description" content="理解 Socket 大致如何工作即可：">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/518e5b65ac614b32b4e62956ce8169a9~tplv-k3u1fbpfcp-watermark.image">
-<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e35daca1a4004165ae99b38b42cfb831~tplv-k3u1fbpfcp-watermark.image">
-<meta property="article:published_time" content="2023-02-12T06:34:55.000Z">
-<meta property="article:modified_time" content="2023-02-12T09:51:16.318Z">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2082de3a6414ed48ea58330a91fa838~tplv-k3u1fbpfcp-watermark.image">
+<meta property="article:published_time" content="2023-02-12T14:06:45.000Z">
+<meta property="article:modified_time" content="2023-02-12T14:07:26.125Z">
 <meta property="article:author" content="YueQ">
-<meta property="article:tag" content="IDEA 插件">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/518e5b65ac614b32b4e62956ce8169a9~tplv-k3u1fbpfcp-watermark.image">
+<meta name="twitter:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2082de3a6414ed48ea58330a91fa838~tplv-k3u1fbpfcp-watermark.image">
   
     <link rel="alternative" href="/atom.xml" title="YueQ Blog" type="application/atom+xml">
   
@@ -174,14 +173,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-IDEA_plugin_hello_world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Android/binder/socket" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      IDEA 插件 Hello World
+      Linux Socket
     </h1>
   
 
@@ -193,8 +192,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2023/02/12/IDEA_plugin_hello_world/" class="archive-article-date">
-        <time datetime="2023-02-12T06:34:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
+<a href="/2023/02/12/Android/binder/socket/" class="archive-article-date">
+        <time datetime="2023-02-12T14:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
 </a>
 
   
@@ -207,7 +206,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">666字</span>
+      <span class="post-count">110字</span>
     </span>
   </span>
 
@@ -216,7 +215,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -227,34 +226,22 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="1-工程结构"><a href="#1-工程结构" class="headerlink" title="1. 工程结构"></a>1. 工程结构</h3><ul>
-<li>HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面</li>
-<li>MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。</li>
-<li>MySearchableConfigurable，可以用于 Settings 中配置窗体。</li>
-<li>TestUI 是基于 Swing 开发的窗体，验证在 AnAction 实现类中打开。</li>
-<li>plugin.xml 是整个 IDEA 咖啡的配置文件，你所有的窗体都会在这个配置文件里有所体现。</li>
-</ul>
+    <blockquote>
+<p>理解 Socket 大致如何工作即可：</p>
+</blockquote>
 <span id="more"></span>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PluginGuide</span><br><span class="line">├── .gradle</span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   └── java</span><br><span class="line">    │       ├── HiClazz.java</span><br><span class="line">    │       ├── MyDumbAwareAction.java</span><br><span class="line">    │       ├── MySearchableConfigurable.java</span><br><span class="line">    │       ├── MyToolWindowFactory.java    </span><br><span class="line">    │       └── TestUI.java    </span><br><span class="line">    └── resources</span><br><span class="line">        ├── icons  </span><br><span class="line">        └── META-INF</span><br><span class="line">            └── plugin.xml </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="2-AnAction"><a href="#2-AnAction" class="headerlink" title="2. AnAction"></a>2. AnAction</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class HiClazz extends AnAction &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void actionPerformed(AnActionEvent e) &#123;</span><br><span class="line">        Project project = e.getData(PlatformDataKeys.PROJECT);</span><br><span class="line">        PsiFile psiFile = e.getData(CommonDataKeys.PSI_FILE);</span><br><span class="line">        String classPath = psiFile.getVirtualFile().getPath();</span><br><span class="line">        String title = &quot;Hello World!&quot;;</span><br><span class="line">        Messages.showMessageDialog(project, classPath, title, Messages.getInformationIcon());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>测试在 IDEA 中读取鼠标停留在类文件中的信息。我们可以把这个 AnAction 配置到各个 IDEA 菜单中。</li>
-</ul>
-<h3 id="3-plugin-xml"><a href="#3-plugin-xml" class="headerlink" title="3 plugin.xml"></a>3 plugin.xml</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;extensions defaultExtensionNs=&quot;com.intellij&quot;&gt;</span><br><span class="line">    &lt;!-- Add your extensions here --&gt;</span><br><span class="line">    &lt;toolWindow canCloseContents=&quot;true&quot; anchor=&quot;bottom&quot;</span><br><span class="line">                id=&quot;SmartIM&quot;</span><br><span class="line">                factoryClass=&quot;MyToolWindowFactory&quot;&gt;</span><br><span class="line">    &lt;/toolWindow&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 在Setting中添加自定义配置模版 --&gt;</span><br><span class="line">    &lt;projectConfigurable groupId=&quot;Other Settings&quot; displayName=&quot;My Config&quot; id=&quot;thief.id&quot;</span><br><span class="line">                         instance=&quot;MySearchableConfigurable&quot;/&gt;</span><br><span class="line">&lt;/extensions&gt;</span><br><span class="line"></span><br><span class="line">&lt;actions&gt;</span><br><span class="line">    &lt;!-- Add your actions here --&gt;</span><br><span class="line">    &lt;action id=&quot;HiId_FileMenu&quot; class=&quot;HiClazz&quot; text=&quot;HiName&quot;&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;FileMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;MainMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;EditMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;ViewMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;CodeMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;AnalyzeMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;RefactoringMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;BuildMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;RunMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;ToolsMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;WindowMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;HelpMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">    &lt;/action&gt;</span><br><span class="line">    &lt;action id=&quot;HiId_EditorPopupMenu&quot; class=&quot;HiClazz&quot; text=&quot;HiName&quot;&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;EditorPopupMenu&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">    &lt;/action&gt;</span><br><span class="line">    &lt;action id=&quot;HiId_MainToolBar&quot; class=&quot;HiClazz&quot; text=&quot;HiName&quot;&gt;</span><br><span class="line">        &lt;add-to-group group-id=&quot;MainToolBar&quot; anchor=&quot;first&quot;/&gt;</span><br><span class="line">    &lt;/action&gt;</span><br><span class="line">&lt;/actions&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>在 plugin.xml 的配置中，主要是把各个功能实现窗体配置到对应的菜单下，比如 Tools 下、toolWindow 里等。</li>
-</ul>
-<h3 id="4-测试结果"><a href="#4-测试结果" class="headerlink" title="4 测试结果"></a>4 测试结果</h3><p><strong>启动运行</strong><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/518e5b65ac614b32b4e62956ce8169a9~tplv-k3u1fbpfcp-watermark.image" alt="Gradle.png"></p>
-<ul>
-<li>IDEA 插件开发运行会基于 Plugin 或者 Gradle 下配置的 <code>::runIde</code></li>
-</ul>
-<p><strong>运行效果</strong></p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e35daca1a4004165ae99b38b42cfb831~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
-<ul>
-<li>当鼠标点到类的上，在点 HiName 就可以看到对应的工程类信息了。</li>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2082de3a6414ed48ea58330a91fa838~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<blockquote>
+<p>内核空间：拥有<strong>两个缓冲区</strong>，一个负责读，另一个负责写</p>
+</blockquote>
+<h2 id="工作流程："><a href="#工作流程：" class="headerlink" title="工作流程："></a>工作流程：</h2><p>发送与接收消息，都需要从一个 <code>Socket</code> 缓冲区拷贝到另一个 <code>Socket</code> 缓冲区中，最后由接收进程读取数据。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>C&#x2F;S 架构模式</li>
+<li>数据经过两次拷贝</li>
+<li>安全性较低，如：进程A，B同时使用一个 Socket</li>
 </ul>
 
     
@@ -302,7 +289,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://frioa.github.io/2023/02/12/IDEA_plugin_hello_world/" title="IDEA 插件 Hello World" target="_blank">https://frioa.github.io/2023/02/12/IDEA_plugin_hello_world/</a>
+          <a href="https://frioa.github.io/2023/02/12/Android/binder/socket/" title="Linux Socket" target="_blank">https://frioa.github.io/2023/02/12/Android/binder/socket/</a>
         </li>
         
         <li>
@@ -324,11 +311,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IDEA 插件</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		
 		</ul>
@@ -384,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://frioa.github.io/2023/02/12/IDEA_plugin_hello_world/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://frioa.github.io/2023/02/12/Android/binder/socket/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -399,7 +386,7 @@
 
 <nav id="article-nav">
   
-    <a href="/2023/02/12/Android/binder/pipeline/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/22023/02/12/Android/binder/msg_queue/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -408,6 +395,11 @@
       </div>
     </a>
   
+  
+    <a href="/2023/02/12/Android/binder/pipeline/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux 消息队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
