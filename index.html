@@ -172,6 +172,186 @@
             
 
   
+    <article id="post-Android/binder/msg_queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/22023/02/12/Android/binder/msg_queue/" target="_blank">Linux 消息队列</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/22023/02/12/Android/binder/msg_queue/" class="archive-article-date">
+        <time datetime="+022023-02-12T13:42:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>22023-02-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <blockquote>
+<p>理解管道大致如何工作即可：</p>
+</blockquote>
+    
+    <a class="article-more-a" href="/22023/02/12/Android/binder/msg_queue/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/22023/02/12/Android/binder/msg_queue/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android/binder/pipeline" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/02/12/Android/binder/pipeline/" target="_blank">Linux 消息队列</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/02/12/Android/binder/pipeline/" class="archive-article-date">
+        <time datetime="2023-02-12T13:54:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <blockquote>
+<p>理解消息队列大致如何工作即可：</p>
+</blockquote>
+    
+    <a class="article-more-a" href="/2023/02/12/Android/binder/pipeline/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/02/12/Android/binder/pipeline/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-IDEA_plugin_hello_world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -202,7 +382,12 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="1-工程结构"><a href="#1-工程结构" class="headerlink" title="1. 工程结构"></a>1. 工程结构</h3><ul>
-<li>HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面
+<li>HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面</li>
+<li>MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。</li>
+<li>MySearchableConfigurable，可以用于 Settings 中配置窗体。</li>
+<li>TestUI 是基于 Swing 开发的窗体，验证在 AnAction 实现类中打开。</li>
+<li>plugin.xml 是整个 IDEA 咖啡的配置文件，你所有的窗体都会在这个配置文件里有所体现。</li>
+</ul>
     
     <a class="article-more-a" href="/2023/02/12/IDEA_plugin_hello_world/#more">more >></a>
     
@@ -399,6 +584,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>

@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面">
+  <meta name="description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面 MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。 MySearchableConfigurable，可以用于 Settings 中配置窗体。 TestUI 是基于 Swin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDEA 插件 Hello World">
 <meta property="og:url" content="https://frioa.github.io/2023/02/12/IDEA_plugin_hello_world/index.html">
 <meta property="og:site_name" content="YueQ Blog">
-<meta property="og:description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面">
+<meta property="og:description" content="1. 工程结构 HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面 MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。 MySearchableConfigurable，可以用于 Settings 中配置窗体。 TestUI 是基于 Swin">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/518e5b65ac614b32b4e62956ce8169a9~tplv-k3u1fbpfcp-watermark.image">
 <meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e35daca1a4004165ae99b38b42cfb831~tplv-k3u1fbpfcp-watermark.image">
 <meta property="article:published_time" content="2023-02-12T06:34:55.000Z">
-<meta property="article:modified_time" content="2023-02-12T09:25:52.500Z">
+<meta property="article:modified_time" content="2023-02-12T09:51:16.318Z">
 <meta property="article:author" content="YueQ">
 <meta property="article:tag" content="IDEA 插件">
 <meta property="article:tag" content="Java">
@@ -228,12 +228,14 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="1-工程结构"><a href="#1-工程结构" class="headerlink" title="1. 工程结构"></a>1. 工程结构</h3><ul>
-<li>HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面<span id="more"></span></li>
+<li>HiClazz 是继承 AnAction 的实现类，用于附着到 IDEA 的窗体上，点击后打开对应页面</li>
 <li>MyDumbAwareAction、MyToolWindowFactory，配合使用，用于在 IDEA 最下面的窗体设置，与你看见的控制台输出信息位置一样。</li>
 <li>MySearchableConfigurable，可以用于 Settings 中配置窗体。</li>
 <li>TestUI 是基于 Swing 开发的窗体，验证在 AnAction 实现类中打开。</li>
 <li>plugin.xml 是整个 IDEA 咖啡的配置文件，你所有的窗体都会在这个配置文件里有所体现。</li>
 </ul>
+<span id="more"></span>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PluginGuide</span><br><span class="line">├── .gradle</span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   └── java</span><br><span class="line">    │       ├── HiClazz.java</span><br><span class="line">    │       ├── MyDumbAwareAction.java</span><br><span class="line">    │       ├── MySearchableConfigurable.java</span><br><span class="line">    │       ├── MyToolWindowFactory.java    </span><br><span class="line">    │       └── TestUI.java    </span><br><span class="line">    └── resources</span><br><span class="line">        ├── icons  </span><br><span class="line">        └── META-INF</span><br><span class="line">            └── plugin.xml </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-AnAction"><a href="#2-AnAction" class="headerlink" title="2. AnAction"></a>2. AnAction</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class HiClazz extends AnAction &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void actionPerformed(AnActionEvent e) &#123;</span><br><span class="line">        Project project = e.getData(PlatformDataKeys.PROJECT);</span><br><span class="line">        PsiFile psiFile = e.getData(CommonDataKeys.PSI_FILE);</span><br><span class="line">        String classPath = psiFile.getVirtualFile().getPath();</span><br><span class="line">        String title = &quot;Hello World!&quot;;</span><br><span class="line">        Messages.showMessageDialog(project, classPath, title, Messages.getInformationIcon());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -394,6 +396,20 @@
   </div>
 </article>
 
+
+<nav id="article-nav">
+  
+    <a href="/2023/02/12/Android/binder/pipeline/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux 消息队列
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
 
 <aside class="wrap-side-operation">
@@ -556,6 +572,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
